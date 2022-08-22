@@ -1,6 +1,7 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { BarSeriesOption, EChartsOption, LineSeriesOption } from 'echarts';
 import moment from 'moment';
+import { environment } from 'src/environments/environment';
 
 import { Asset } from '../../models/asset.model';
 import { ChallengeService } from '../../services/challenge.service';
@@ -123,7 +124,10 @@ export class ChallengeComponent implements AfterViewInit {
    * @returns {PieData[]} sous la forme [{name, value}]
    */
   get systemByEnvData(): PieData[] {
+
     return [];
+    // name : Recuperer le nom issu de l'id des environnements
+    //value : utiliser .find pour trouver le nombre de fois que environnementID === id d'un environnement
   }
 
   /**
@@ -146,7 +150,7 @@ export class ChallengeComponent implements AfterViewInit {
    * tip: utiliser moment(hour).format('LL') pour récupérer le jour pour une heure donnée
    */
   get xAxisByDays(): string[] {
-    return [];
+    return this.challengeService.timeframe.map(day => moment(day).format('LL'));
   }
 
   /**
